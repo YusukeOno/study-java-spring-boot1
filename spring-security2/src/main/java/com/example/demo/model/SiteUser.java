@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.validator.UniqueLogin;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +21,7 @@ public class SiteUser {
     private Long id;
 
     @Size(min = 2, max = 20)
+    @UniqueLogin // 自作バリデーションを追加
     private String username;
 
     @Size(min = 4, max = 255)
