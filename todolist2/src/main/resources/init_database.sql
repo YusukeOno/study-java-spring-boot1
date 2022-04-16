@@ -1,0 +1,2 @@
+CREATE USER todouser WITH PASSWORD 'pass';
+CREATE DATABASE todolist OWNER todouser ENCODING 'UTF8';
