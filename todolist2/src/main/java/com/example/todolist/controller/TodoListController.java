@@ -41,14 +41,14 @@ public class TodoListController {
         modelAndView.setViewName("todoForm");
         Todo todo = todoRepository.findById(id).get();
         modelAndView.addObject("todoData", todo);
-        session.setAttribute("model", "update");
+        session.setAttribute("mode", "update");
         return modelAndView;
     }
 
     @GetMapping("/todo/create")
     public ModelAndView createTodo(ModelAndView modelAndView) {
         modelAndView.setViewName("todoForm");
-        modelAndView.addObject("todoForm", new TodoData());
+        modelAndView.addObject("todoData", new TodoData());
         session.setAttribute("mode", "create");
         return modelAndView;
     }
