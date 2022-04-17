@@ -54,7 +54,7 @@ public class TodoListController {
     }
 
     @PostMapping("/todo/create")
-    public ModelAndView createTodo(@ModelAttribute @Validated TodoData todoData,
+    public String createTodo(@ModelAttribute @Validated TodoData todoData,
                                    BindingResult result,
                                    ModelAndView modelAndView) {
         // エラーチェック
@@ -63,11 +63,11 @@ public class TodoListController {
             // エラーなし
             Todo todo = todoData.toEntity();
             todoRepository.saveAndFlush(todo);
-            return showTodoList(modelAndView);
+            return "redirect:/todo";
         } else {
             // エラーあり
             modelAndView.setViewName("todoForm");
-            return modelAndView;
+            return "todoForm";
         }
     }
 
