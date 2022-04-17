@@ -56,7 +56,7 @@ public class TodoService {
                 FieldError fieldError = new FieldError(
                         result.getObjectName(),
                         "deadline",
-                        "期限を設定するときはyyyy-mm-dd形式で丹生ryくしてください"
+                        "期限を設定するときはyyyy-mm-dd形式で入力してください"
                 );
                 result.addError(fieldError);
                 ans = false;
