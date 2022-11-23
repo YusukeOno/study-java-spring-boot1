@@ -2,6 +2,7 @@ package com.example.todolist.controller;
 
 import com.example.todolist.entity.Todo;
 import com.example.todolist.form.TodoData;
+import com.example.todolist.form.TodoQuery;
 import com.example.todolist.repository.TodoRepository;
 import com.example.todolist.service.TodoService;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,7 @@ public class TodoListController {
         modelAndView.setViewName("todoList");
         List<Todo> todoList = todoRepository.findAll();
         modelAndView.addObject("todoList", todoList);
+        modelAndView.addObject("todoQuery", new TodoQuery());
         return modelAndView;
     }
 
@@ -53,6 +55,20 @@ public class TodoListController {
         return modelAndView;
     }
 
+    @PostMapping("/todo/query")
+    public ModelAndView queryTodo(@ModelAttribute TodoQuery todoQuery,
+                                  BindingResult result,
+                                  ModelAndView modelAndView) {
+        modelAndView.setViewName("todoList");
+        List<Todo> todoList = null;
+        if (todoService.isValid(todoQuery, result)) {
+            // エラーがなければ検索
+            todoList = todoService.doQuery(todoQuery);
+        }
+
+        modelAndView.addObject("todoList", todoList);
+        return  modelAndView;
+    }
     @PostMapping("/todo/create")
     public String createTodo(@ModelAttribute @Validated TodoData todoData,
                                    BindingResult result,
